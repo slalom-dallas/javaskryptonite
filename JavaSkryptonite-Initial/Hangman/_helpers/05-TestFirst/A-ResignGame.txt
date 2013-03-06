@@ -1,0 +1,17 @@
+﻿// Initial... does not end the game.
+Hangman.Game.prototype.resign = function () {
+    for (var i = 0; i < this.letters.length; i++) {
+        this.puzzle.guessLetter(this.letters[i].value);
+    }
+
+    return this.puzzle.secretWord;
+}
+
+// Final... ends the game with a loss.
+Hangman.Game.prototype.resign = function () {
+    for (var i = 0; i < this.letters.length; i++) {
+        this.guess(this.letters[i].value);
+    }
+
+    return this.puzzle.getMatchedWord();
+}

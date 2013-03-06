@@ -1,0 +1,30 @@
+﻿// Add as first line in async.it
+spyOn(jQuery, 'ajax');
+
+// Add as last lines in async.it
+expect(jQuery.ajax).toHaveBeenCalled();
+expect(jQuery.ajax.callCount).toBe(1);
+jQuery.ajax.mostRecentCall.args[0].success(JSON.stringify("Slalom"));
+
+// Completed async.it
+async.it("should return a word within the specified min and max lengths", function (done) {
+
+    spyOn(jQuery, 'ajax');
+
+    var minLength = 1, maxLength = 100, newWord;
+	var provider = new Hangman.WordProvider();
+    provider.getRandomWord(minLength, maxLength, function (result) {
+        newWord = result;
+
+        expect(newWord).toBeDefined();
+        expect(newWord).not.toBe(null);
+        expect(newWord.length).toBeGreaterThan(minLength - 1);
+        expect(newWord.length).toBeLessThan(maxLength + 1);
+
+        done();
+    });
+
+    expect(jQuery.ajax).toHaveBeenCalled();
+    expect(jQuery.ajax.callCount).toBe(1);
+    jQuery.ajax.mostRecentCall.args[0].success(JSON.stringify("Slalom"));
+});

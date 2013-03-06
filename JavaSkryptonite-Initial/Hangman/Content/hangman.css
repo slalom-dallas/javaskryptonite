@@ -1,0 +1,165 @@
+﻿body {
+	background-image: linear-gradient(bottom, rgb(124,181,214) 9%, rgb(224,237,245) 55%);
+	background-image: -o-linear-gradient(bottom, rgb(124,181,214) 9%, rgb(224,237,245) 55%);
+	background-image: -moz-linear-gradient(bottom, rgb(124,181,214) 9%, rgb(224,237,245) 55%);
+	background-image: -webkit-linear-gradient(bottom, rgb(124,181,214) 9%, rgb(224,237,245) 55%);
+	background-image: -ms-linear-gradient(bottom, rgb(124,181,214) 9%, rgb(224,237,245) 55%);
+}
+
+button {
+	border: 0px;
+	cursor: pointer;			
+}
+.letter {
+    /*TODO: figure this one out*/
+    text-align: center;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+
+#container {
+	margin-left: auto;
+	margin-right: auto;
+	width: 900px;
+	background-image: url(/Images/javaskryptonite.png);
+	background-repeat: no-repeat;
+	background-position: -30px 10px;
+	height: 100%;
+}
+
+#container div {
+	border: 0px solid red;
+    position: absolute;	
+	left: 50%;
+}
+
+#gallows {
+	border-color: yellow;
+	background-image: url(/Images/gallows.png);
+	background-position: top right;
+	background-repeat: no-repeat;
+	height: 655px;
+	width: 300px;
+	margin-left: 150px;
+}
+
+
+#hangman {
+	border-color: blue;
+	width: 350px;
+	height: 451px;
+	top: 238px;
+	margin-left: 29px;
+}
+#hangman.head {
+	background-image: url(/Images/head.png);
+}
+#hangman.torso, #hangman.body {
+	background-image: url(/Images/torso.png);
+}
+#hangman.left-arm {
+	background-image: url(/Images/left-arm.png);
+}
+#hangman.right-arm {
+	background-image: url(/Images/right-arm.png);
+}
+#hangman.left-leg {
+	background-image: url(/Images/left-leg.png);
+}
+#hangman.right-leg {
+	background-image: url(/Images/right-leg.png);
+}
+
+
+#buttons {
+	border-color: green;
+	margin-left: -450px;
+	margin-top: 608px;
+}
+#buttons button {
+	float: left;
+	width: 161px;
+	height: 46px;
+	margin-right: 30px;
+}
+#buttons #newGameAction
+{
+	background-image: url(/Images/new-game.png);
+}
+#buttons #resignGameAction
+{
+	background-image: url(/Images/resign-game.png);
+}
+#buttons #hintGameAction
+{
+	background-image: url(/Images/hint.png);
+}
+
+#letterBoard {
+	border-color: purple;
+	width: 460px;
+	margin: 300px 0px 0px -450px;
+	text-align: center;
+}
+
+#letterBoard button {
+	background-color: transparent;
+	font-family: 'SF Comic Script', sans-serif;
+	font-size: 40pt;
+}
+#letterBoard button.guessed-success {
+    color: #E12208;
+}
+#letterBoard button.guessed-fail {
+    opacity: .25;
+}
+
+#secret {			
+	margin: 25px 0px;
+	text-align: center;
+}
+#secret #wordBoard {
+	display: inline-block;
+}
+
+#secret #wordBoard button {
+	font-family: 'SF Comic Script', sans-serif;
+	font-size: 30pt;
+	position: static;
+	float: left;
+	width: 50px;
+	height: 50px;
+	margin: 0px 5px;
+    color: white;
+	background-color: white;
+	border-bottom: 3px solid black;
+}
+
+#secret #wordBoard .guessed {
+    color: #E12208;
+}
+
+/* 
+    Must use opactity to support animations (over display).
+    http://stackoverflow.com/questions/3331353/transitions-on-the-display-property 
+*/
+#gameResult {
+    -webkit-transition: opacity 500ms ease-out;
+    transition: opacity 500ms ease-out;
+    opacity: 0; 
+    height: 0;
+	width: 552px;
+	margin-left: -450px;
+	margin-top: 50px;
+}
+#gameResult.loser {
+    opacity: 1;
+	height: 540px;
+	background-image: url(/Images/loser.png);
+	background-position: -10px 75px;
+}
+#gameResult.winner {
+    opacity: 1;
+	height: 540px;
+	background-image: url(/Images/winner.png);	
+}

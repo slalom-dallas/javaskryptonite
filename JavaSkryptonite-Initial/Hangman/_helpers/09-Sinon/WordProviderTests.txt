@@ -1,0 +1,18 @@
+﻿// Add sinon to top as reference
+/// <reference path="../jasmine/sinon-1.5.2.js" />
+
+// Add before/after each
+var server;
+
+beforeEach(function () {
+    server = sinon.fakeServer.create();
+    server.respondWith(JSON.stringify("Slalom"));
+    server.autoRespond = true;
+});
+
+afterEach(function () {
+    server.restore();
+});
+
+// IF you want to get specific.
+server.respondWith("GET", "/api/wordProvider?minSize=5&maxSize=100", JSON.stringify("Slalom"));

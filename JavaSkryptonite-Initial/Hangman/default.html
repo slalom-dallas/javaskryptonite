@@ -1,0 +1,112 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JavaSkryptonite - The Hangman Game</title>
+    <link href="Content/hangman.css" rel="stylesheet" />
+</head>
+<body id="gameView">
+    <!-- The word to guess. -->
+	<div id="secret">
+		<div id="wordBoard"></div>
+	</div>
+    <div id="container">
+        <!-- Game actions. -->
+		<div id="buttons">
+			<button id="newGameAction"></button>
+			<button id="resignGameAction"> </button>
+			<button id="hintGameAction"> </button>
+		</div>
+        <!-- The gallows... where you get hanged! -->
+		<div id="gallows"></div>		
+        <div id="hangman"></div>
+        <!-- The list of letters to choose from. -->
+		<div id="letterBoard"></div>
+        <!-- The result of a completed game. -->
+		<div id="gameResult"></div>
+	</div>
+</body>
+</html>
+<script src="scripts/jquery-1.9.1.js"></script>
+<script type="text/javascript">
+    // Initialize the game when the content is loaded.
+    $(function () {
+        $("#newGameAction").click(prepareNewGame);
+        initLetterBoard();
+        prepareNewGame();
+    });
+
+    // Initialize the letter board.
+    function initLetterBoard() {
+        var start = "A".charCodeAt(0), end = "Z".charCodeAt(0);
+        for (var i = start; i <= end; i++) {
+            var value = String.fromCharCode(i);
+            var id = "letter-" + value;
+            $("<button/>", { id: id, class: "letter", text: value, click: letterClicked }).appendTo($("#letterBoard"));
+        }
+    }
+
+    // Prepare for a new game. Resets existing DOM elements as needed.
+    function prepareNewGame() {
+        _hangedParts = [];
+        $("#letterBoard .letter").removeClass("guessed-success").removeClass("guessed-fail");
+        $("#wordBoard .letter").remove();
+        $("#hangman").removeClass();
+        $("#gameResult").removeClass();
+        _current = ++_current % _words.length;
+        for (var i = 0; i < _words[_current].length; i++) {
+            var value = _words[_current][i].toUpperCase();
+            $("<button/>", { class: "letter", text: value }).appendTo($("#wordBoard"));
+        }
+    };
+
+    // * Finds all letters in the secret word that match the specified 
+    // letterValue, and maintains the list of all matched letters.
+    function guessLetter(letterValue) {
+        var matches = $("#wordBoard .letter:contains(" + letterValue + ")");
+        matches.addClass("guessed");
+        return matches;
+    }
+
+    // Handles when a letter is tapped by the user. Tries to match the letter to the game.
+    function letterClicked(event) {
+        var letterValue = $(event.target).text();
+        var matches = guessLetter(letterValue);
+
+        var letterPicker = $("#letter-" + letterValue);
+        if (matches.length > 0) {
+            letterPicker.addClass("guessed-success");
+        }
+        else {
+            $("#hangman").addClass(_bodyParts[_hangedParts.length]);
+            letterPicker.addClass("guessed-fail");
+            _hangedParts.push(_bodyParts[_hangedParts.length]);
+        }
+
+        checkWinnerLooser();
+    };
+
+    // Determines if the game has been won or lost, and responds accordingly.
+    function checkWinnerLooser() {
+        if (_hangedParts.length === _bodyParts.length) {
+            $("#gameResult").addClass("loser");
+        }
+        else {
+            var winner = true;
+            $("#wordBoard .letter").each(function (i, e) {
+                winner = winner && $(this).hasClass("guessed");
+                return winner;
+            });
+
+            if (winner) {
+                $("#gameResult").addClass("winner");
+            }
+        }
+    }
+
+    // The available words, and the current word.
+    var _words = ["JavaScript",/*is to*/"Coding",/*as*/"Kryptonite",/*is to*/"Superman"];
+    var _current = -1;
+
+    // The available body parts, and those that have been handed.
+    var _bodyParts = ["head", "body", "left-arm", "right-arm", "left-leg", "right-leg"];
+    var _hangedParts = [];
+</script>

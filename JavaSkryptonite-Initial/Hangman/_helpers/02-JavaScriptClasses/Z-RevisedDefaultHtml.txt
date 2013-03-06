@@ -1,0 +1,12 @@
+﻿<script src="Scripts/Hangman/Gallows.js"></script>
+<script src="Scripts/Hangman/Letter.js"></script>
+<script src="Scripts/Hangman/WordProvider.js"></script>
+<script src="Scripts/Hangman/WordPuzzle.js"></script>
+<script src="Scripts/Hangman/Game.js"></script>
+<script src="Scripts/Hangman/GamePresenter.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var presenter = new Hangman.GamePresenter($("#gameView"));
+        presenter.prepareNewGame();
+    });
+</script>

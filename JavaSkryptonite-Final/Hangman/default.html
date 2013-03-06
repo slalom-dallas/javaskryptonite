@@ -1,0 +1,40 @@
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>JavaSkryptonite - The Hangman Game</title>
+    <link href="Content/hangman.css" rel="stylesheet" />
+</head>
+<body id="gameView">
+    <!-- The word to guess. -->
+	<div id="secret">
+		<div id="wordBoard"></div>
+	</div>
+    <div id="container">
+        <!-- Game actions. -->
+		<div id="buttons">
+			<button id="newGameAction"></button>
+			<button id="resignGameAction"> </button>
+			<button id="hintGameAction"> </button>
+		</div>
+        <!-- The gallows... where you get hanged! -->
+		<div id="gallows"></div>		
+        <div id="hangman"></div>
+        <!-- The list of letters to choose from. -->
+		<div id="letterBoard"></div>
+        <!-- The result of a completed game. -->
+		<div id="gameResult"></div>
+	</div>
+</body>
+</html>
+<script src="scripts/jquery-1.9.1.js"></script>
+<script src="Scripts/Hangman/Gallows.js"></script>
+<script src="Scripts/Hangman/Letter.js"></script>
+<script src="Scripts/Hangman/WordProvider.js"></script>
+<script src="Scripts/Hangman/WordPuzzle.js"></script>
+<script src="Scripts/Hangman/Game.js"></script>
+<script src="Scripts/Hangman/GamePresenter.js"></script>
+<script type="text/javascript">
+    $(function () {
+        var presenter = new Hangman.GamePresenter($("#gameView"));
+        presenter.prepareNewGame();
+    });
+</script>

@@ -1,0 +1,16 @@
+﻿// WordProvider: Change from/to
+completed(result);
+setTimeout(function () { completed(result) }, 500);
+
+// WordProviderTests: Add waitsFor and runs
+waitsFor(function () {
+    return newWord != jasmine.undefined;
+}, "WordProvider timed out before returning a word.", 10000);
+
+runs(function () {
+    expect(newWord).toBeDefined();
+    expect(newWord).not.toBe(null);
+    expect(newWord.length).toBeGreaterThan(minLength - 1);
+    expect(newWord.length).toBeLessThan(maxLength + 1);
+});
+ 

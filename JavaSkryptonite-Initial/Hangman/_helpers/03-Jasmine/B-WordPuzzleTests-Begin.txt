@@ -1,0 +1,12 @@
+﻿/// <reference path="../jasmine/jasmine.js" />
+/// <reference path="../Hangman/WordPuzzle.js" />
+describe("WordPuzzle", function () {
+
+    it("should tell me the position when I guess a letter in the word", function () {
+		expect().toBeDefined();
+    });
+
+    it("should tell me all letters that have already been matched", function () {
+		expect().toBeDefined();
+    });
+});

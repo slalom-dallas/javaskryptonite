@@ -1,0 +1,7 @@
+﻿// We will use jquery; add this reference or chutzpah will not work.
+/// <reference path="../jquery-1.7.1.js" />
+
+// Change implementation
+var url = "/api/wordProvider";
+var data = { minSize: minLength, maxSize: maxLength };
+$.getJSON(url, data, function (result) { completed(result); });
